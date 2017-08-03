@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2017/08/02/hello-world/</loc>
+    <loc>http://kenny-tang.github.io/2017/01/03/HexoAdmin/</loc>
     
-    <lastmod>2017-08-02T06:53:54.333Z</lastmod>
+    <lastmod>2017-08-03T09:39:54.640Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://kenny-tang.github.io/2016/01/03/hello-world/</loc>
+    
+    <lastmod>2017-08-03T09:39:54.640Z</lastmod>
     
   </url>
   
