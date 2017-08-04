@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://kenny-tang.github.io/2017/01/03/HexoAdmin/</loc>
+    <loc>http://kenny-tang.github.io/2017/08/04/maven/</loc>
     
-    <lastmod>2017-08-03T11:50:34.405Z</lastmod>
+    <lastmod>2017-08-04T09:39:30.076Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://kenny-tang.github.io/2017/08/04/Ecliplse/</loc>
+    
+    <lastmod>2017-08-04T09:39:30.045Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://kenny-tang.github.io/2016/01/03/hello-world/</loc>
     
-    <lastmod>2017-08-03T11:50:34.405Z</lastmod>
+    <lastmod>2017-08-04T09:39:30.045Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://kenny-tang.github.io/2017/01/03/HexoAdmin/</loc>
+    
+    <lastmod>2017-08-04T09:39:30.045Z</lastmod>
     
   </url>
   

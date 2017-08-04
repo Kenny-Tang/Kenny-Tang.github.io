@@ -7,11 +7,11 @@
   
   
   
-  <title>Hexo</title>
+  <title>Archives: 2017/8 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://kenny-tang.github.io/index.html">
+<meta property="og:url" content="http://kenny-tang.github.io/archives/2017/08/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
@@ -28,9 +28,6 @@
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
-    
-    
-  
   
       <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
@@ -41,9 +38,9 @@
       var yiliaConfig = {
           fancybox: true,
           animate: true,
-          isHome: true,
+          isHome: false,
           isPost: false,
-          isArchive: false,
+          isArchive: true,
           isTag: false,
           isCategory: false,
           open_in_new: false
@@ -274,276 +271,79 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-Ecliplse" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a  href="/2017/08/04/Ecliplse/" class="article-date">
-      <time datetime="2017-08-04T17:13:35.000Z" itemprop="datePublished">2017-08-04</time>
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a  href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a  href="/2017/08/04/Ecliplse/" class="archive-article-date">
+      <time datetime="2017-08-04T17:13:35.000Z" itemprop="datePublished">08-04</time>
 </a>
 
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
+        </div>
+         
   
     <h1 itemprop="name">
-      <a  class="article-title" href="/2017/08/04/Ecliplse/">Ecliplse</a>
+      <a  class="archive-article-title" href="/2017/08/04/Ecliplse/">Ecliplse</a>
     </h1>
   
 
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-        <p>Eclipse配置<br>将整个工程的编码设置为UTF-8</p>
-<p>Windows–&gt;Preferences–&gt;General–&gt;Workspace 在右侧版面中，选择 Text file encoding 选择 UTF-8。</p>
-<p>将JSP页面的默认编码设置为UTF-8</p>
-<p>Windows–&gt;Web–&gt;JSP Files   在右侧版面中，选择Encoding 为UTF-8</p>
-<p>使用 Tab 键时，默认插入空格<br><img src="/images/1.png" alt=""></p>
-<p>关于在项目中使用tab还是使用空格，都有自己的喜好，我自己更倾向于使用空格，起源于之前在一个Android项目，使用tab出现无法正确的对齐的情况，导致界面出现错乱。各种编译器，平台对tab的支持可能是不相同的，这就可能导致不同的结果，但是无论那种平台对space的支持肯定是一致的。因此建议使用space代替tab进行操作。<br><img src="/images/3.png" alt=""><br>之前在kepler中使用的是如上的配置，后来升级了一下版本，现在使用的是Luna使用如上的设置，发现不管用了。于是又细心的找了一下。<br><img src="/images/4.png" alt=""><br>修改Eclipse的启动配置</p>
-<p>eclipse.ini<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">-vm  </div><div class="line">D:\Program Files\Java\jdk1.7.0_06\bin  </div><div class="line">-startup  </div><div class="line">plugins/org.eclipse.equinox.launcher_1.1.0.v20100507.jar  </div><div class="line">--launcher.library  </div><div class="line">plugins/org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100503  </div><div class="line">-product  </div><div class="line">org.eclipse.epp.package.jee.product  </div><div class="line">--launcher.defaultAction  </div><div class="line">openFile  </div><div class="line">--launcher.XXMaxPermSize  </div><div class="line">128M  </div><div class="line">-showsplash  </div><div class="line">org.eclipse.platform  </div><div class="line">--launcher.XXMaxPermSize  </div><div class="line">128m  </div><div class="line">--launcher.defaultAction  </div><div class="line">openFile  </div><div class="line">-vmargs  </div><div class="line">-Dosgi.requiredJavaVersion=1.6  </div><div class="line">-Xverify:none  </div><div class="line">-XX:+UseParallelGC  </div><div class="line">-XX:+DisableExplicitGC  </div><div class="line">-Xms728m  </div><div class="line">-Xmx728m  </div><div class="line">-Xmn273m</div></pre></td></tr></table></figure></p>
-<p>-Xverify:none，Eclipse对字节码的验证，我们可以忽略这个验证过程，认为我们的类文件都是安全的<br>-XX:+UseParallelGC  使用并行的垃圾回收<br>-XX:+DisableExplicitGC 禁止使用System.gc 进行手动的垃圾回收<br>-Xms728m                    定义堆内存初始化大小<br>-Xmx728m                   定义堆内存的最大大小，定义最小与最大的堆大小相同减少堆调整的次数，默认空余堆内存小于40%时，JVM就会增大堆直到最大堆内存；空余堆内存大于70%时JVM会减少堆内存直到最小堆内存。<br>-Xmn273m    年轻带堆内存 官方建议为堆内存的 3/8<br>堆内存的组成    总堆内存 = 年轻带堆内存 + 年老带堆内存 + 持久带堆内存<br>年轻带堆内存    对象刚创建出来时放在这里<br>年老带堆内存    对象在被真正会回收之前会先放在这里<br>持久带堆内存    class文件，元数据等放在这里<br>　关闭Preferences中Validation<br><img src="/images/5.png" alt=""><br>这些校验在使用Eclipse进行开发的过程中并没有感受到其带来的便利，但是使用这些功能会消耗eclipse的内存。所以还是关了吧。Disble All 然后确定。<br><img src="/images/6.png" alt=""></p>
-<p>关闭即时编译</p>
-<p>一般Eclipse会在3s左右检查一次代码有没有改变，如果存在则进行编译，通常的情况下我们是不需要这种及时编译的，在我们运行代码之前编译一次就行了。Ctrl+B Shift+W 都是很好的选择。而且大家通常做的都是ＷＥＢ开发项目在发布前会进行编译。</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
+          
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
 </article>
-
-
-
-
-
-
-
-
-
-
-
   
-    <article id="post-maven" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2017/08/04/maven/" class="article-date">
-      <time datetime="2017-08-04T11:34:59.000Z" itemprop="datePublished">2017-08-04</time>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+          <div class="article-meta">
+              <a  href="/2017/08/04/maven/" class="archive-article-date">
+      <time datetime="2017-08-04T11:34:59.000Z" itemprop="datePublished">08-04</time>
 </a>
 
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
+        </div>
+         
   
     <h1 itemprop="name">
-      <a  class="article-title" href="/2017/08/04/maven/">maven</a>
+      <a  class="archive-article-title" href="/2017/08/04/maven/">maven</a>
     </h1>
   
 
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="article-info info-on-archive">
           
-        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><a href="https://maven.apache.org" target="_blank" rel="external">Maven</a> 是一个优秀的开源代码管理工具， <a href="http://www.apache.org/" target="_blank" rel="external">Apache</a> 基金会下众多的顶级项目之一，在Java的世界里Maven的重要性是不言而喻的，已经成为了Java项目构建事实上的标准，她所使用的思想影响了很多人，让大家对项目如何构建有了一个崭新的认知。</p>
-<p>从 <a href="http://www.apache.org/" target="_blank" rel="external">Apache</a> 首页的项目列表中我们可以找到她<br><img src="/images/lALPACOG82b-633NAgTNBZs_1435_516.png_620x10000q90g.jpg" alt=""></p>
-<h3 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h3><p><a href="https://maven.apache.org" target="_blank" rel="external">Maven</a> 的安装十分的简单，解压即安装<br>笔者安装目录为<br>I:\example\</p>
-<p><img src="/images/pasted-0.png" alt=""></p>
-<p>接下来就是要配置Maven<br>首先设置环境变量<br>计算机 –&gt; 右键属性 –&gt; 高级系统设置 –&gt; 高级选项页 –&gt;  环境变量 –&gt; 新建环境变量</p>
-<p>变量名称 MAVEN_HOME<br>变量值 I:\example\apache-maven-3.3.3</p>
-<p>在DOS 窗口中测试如下</p>
-<p>通常其他的配置可以再settings.xml 文件中进行相应的配置，settings.xml 文件存在于两个位置，<br>一个用于Maven的全局配置，<br>该文件位于${MAVEN_HOME}/conf/settings.xml，<br>另外一个为用户自定义配置项位于用户目录下<br>${user.home}/.m2/settings.xml<br>通常不会更改全局配置文件。<br>一般需要更改仓库目录到自定义的位置，如果不进行配置则默认在${user.home}/.m2/respository下<br>配置示例如下 ： &lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;</p>
-<p><img src="/images/pasted-1.png" alt=""></p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-HexoAdmin" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a  href="/2017/01/03/HexoAdmin/" class="article-date">
-      <time datetime="2017-01-03T14:29:27.000Z" itemprop="datePublished">2017-01-03</time>
-</a>
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2017/01/03/HexoAdmin/">HexoAdmin</a>
-    </h1>
-  
-
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-        <p><a href="[https://jaredforsyth.com/hexo-admin/]">HexoAdmin</a>, 是一款非常优秀的 <a href="http://hexo.io" target="_blank" rel="external">hexo</a> 在线编写插件，支持所见即所得，直接生成预览效果。<br>使用也是非常简单，进入Blog的根目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cd blog</div></pre></td></tr></table></figure>
-<p>安装插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-admin</div></pre></td></tr></table></figure></p>
-<p>然后在浏览器中键入网址 <a href="http://localhost:4000/admin/" target="_blank" rel="external">http://localhost:4000/admin/</a> 就可以在线进行编辑了。</p>
-<p>效果如下<br><img src="/images/hexo-admin-preview.png" alt=""></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo-admin/">hexo-admin</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
-  
 </article>
-
-
-
-
-
-
-
-
-
-
-
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a  href="/2016/01/03/hello-world/" class="article-date">
-      <time datetime="2016-01-03T14:29:27.000Z" itemprop="datePublished">2016-01-03</time>
-</a>
+    </div></section>
+  
 
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a  class="article-title" href="/2016/01/03/hello-world/">Hello World</a>
-    </h1>
-  
 
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hello/">hello</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-
-
-  
-  
 
 </div>
       <footer id="footer">
@@ -633,6 +433,17 @@ ga('send', 'pageview');
         };
     })
 </script>
+
+    <button class="hide-labels">TAG 开关</button>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("button").click(function() {
+                $(".article-info").toggle(200);
+            });
+        });
+    </script>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
