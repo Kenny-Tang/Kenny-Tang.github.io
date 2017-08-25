@@ -274,6 +274,179 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-SQL" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/08/21/SQL/" class="article-date">
+      <time datetime="2017-08-21T11:12:33.000Z" itemprop="datePublished">2017-08-21</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2017/08/21/SQL/">SQL</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">declare </div><div class="line">ts varchar2 (1000) := &apos;boss.customer_sale_day,boss_sale.customer_sale_month&apos; ;</div><div class="line">v_sql varchar2(2000) ;</div><div class="line">v_cnt number  ;</div><div class="line">begin </div><div class="line"> -- 删除历史数据</div><div class="line"> for t in ( select regexp_substr(ts,&apos;[^,]+&apos;, 1, level) name from dual</div><div class="line">            connect by regexp_substr(ts, &apos;[^,]+&apos;, 1, level) is not null) loop</div><div class="line">    v_cnt := 1 ;</div><div class="line">    while v_cnt &gt; 0 loop</div><div class="line">    execute immediate &apos;delete from &apos; || t.name || &apos; where 1=1 and rownum &lt; 50000&apos;;</div><div class="line">    v_cnt := sql%rowcount ;</div><div class="line">    commit ;</div><div class="line">  end loop ;</div><div class="line"> end loop ;</div><div class="line">end ;</div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-利率" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/08/19/利率/" class="article-date">
+      <time datetime="2017-08-19T20:09:24.000Z" itemprop="datePublished">2017-08-19</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2017/08/19/利率/">利率</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>10000 16% 12个月 887.70<br>10000 16% 6个月 471.81</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-String" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2017/08/09/String/" class="article-date">
+      <time datetime="2017-08-09T14:20:58.000Z" itemprop="datePublished">2017-08-09</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a  class="article-title" href="/2017/08/09/String/">String</a>
+    </h1>
+  
+
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <pre><code>String 是我们Java开发中使用过最频繁的类，几天就来剖析一下这个类。
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Ecliplse" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -308,9 +481,9 @@
 <p>将JSP页面的默认编码设置为UTF-8</p>
 <p>Windows–&gt;Web–&gt;JSP Files   在右侧版面中，选择Encoding 为UTF-8</p>
 <p>使用 Tab 键时，默认插入空格<br><img src="/images/1.png" alt=""></p>
-<p>关于在项目中使用tab还是使用空格，都有自己的喜好，我自己更倾向于使用空格，起源于之前在一个Android项目，使用tab出现无法正确的对齐的情况，导致界面出现错乱。各种编译器，平台对tab的支持可能是不相同的，这就可能导致不同的结果，但是无论那种平台对space的支持肯定是一致的。因此建议使用space代替tab进行操作。<br><img src="/images/3.png" alt=""><br>之前在kepler中使用的是如上的配置，后来升级了一下版本，现在使用的是Luna使用如上的设置，发现不管用了。于是又细心的找了一下。<br><img src="/images/4.png" alt=""><br>修改Eclipse的启动配置</p>
+<p>关于在项目中使用tab还是使用空格，都有自己的喜好，我自己更倾向于使用空格，起源于之前在一个Android项目，使用tab出现无法正确的对齐的情况，导致界面出现错乱。各种编译器，平台对tab的支持可能是不相同的，这就可能导致不同的结果，但是无论那种平台对space的支持肯定是一致的。因此建议使用space代替tab进行操作。<br>之前在kepler中使用的是如上的配置，后来升级了一下版本，现在使用的是Luna使用如上的设置，发现不管用了。于是又细心的找了一下。<br><img src="/images/3.png" alt=""><br>修改Eclipse的启动配置</p>
 <p>eclipse.ini<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">-vm  </div><div class="line">D:\Program Files\Java\jdk1.7.0_06\bin  </div><div class="line">-startup  </div><div class="line">plugins/org.eclipse.equinox.launcher_1.1.0.v20100507.jar  </div><div class="line">--launcher.library  </div><div class="line">plugins/org.eclipse.equinox.launcher.win32.win32.x86_1.1.0.v20100503  </div><div class="line">-product  </div><div class="line">org.eclipse.epp.package.jee.product  </div><div class="line">--launcher.defaultAction  </div><div class="line">openFile  </div><div class="line">--launcher.XXMaxPermSize  </div><div class="line">128M  </div><div class="line">-showsplash  </div><div class="line">org.eclipse.platform  </div><div class="line">--launcher.XXMaxPermSize  </div><div class="line">128m  </div><div class="line">--launcher.defaultAction  </div><div class="line">openFile  </div><div class="line">-vmargs  </div><div class="line">-Dosgi.requiredJavaVersion=1.6  </div><div class="line">-Xverify:none  </div><div class="line">-XX:+UseParallelGC  </div><div class="line">-XX:+DisableExplicitGC  </div><div class="line">-Xms728m  </div><div class="line">-Xmx728m  </div><div class="line">-Xmn273m</div></pre></td></tr></table></figure></p>
-<p>-Xverify:none，Eclipse对字节码的验证，我们可以忽略这个验证过程，认为我们的类文件都是安全的<br>-XX:+UseParallelGC  使用并行的垃圾回收<br>-XX:+DisableExplicitGC 禁止使用System.gc 进行手动的垃圾回收<br>-Xms728m                    定义堆内存初始化大小<br>-Xmx728m                   定义堆内存的最大大小，定义最小与最大的堆大小相同减少堆调整的次数，默认空余堆内存小于40%时，JVM就会增大堆直到最大堆内存；空余堆内存大于70%时JVM会减少堆内存直到最小堆内存。<br>-Xmn273m    年轻带堆内存 官方建议为堆内存的 3/8<br>堆内存的组成    总堆内存 = 年轻带堆内存 + 年老带堆内存 + 持久带堆内存<br>年轻带堆内存    对象刚创建出来时放在这里<br>年老带堆内存    对象在被真正会回收之前会先放在这里<br>持久带堆内存    class文件，元数据等放在这里<br>　关闭Preferences中Validation<br><img src="/images/5.png" alt=""><br>这些校验在使用Eclipse进行开发的过程中并没有感受到其带来的便利，但是使用这些功能会消耗eclipse的内存。所以还是关了吧。Disble All 然后确定。<br><img src="/images/6.png" alt=""></p>
+<p>-Xverify:none，Eclipse对字节码的验证，我们可以忽略这个验证过程，认为我们的类文件都是安全的<br>-XX:+UseParallelGC  使用并行的垃圾回收<br>-XX:+DisableExplicitGC 禁止使用System.gc 进行手动的垃圾回收<br>-Xms728m                    定义堆内存初始化大小<br>-Xmx728m                   定义堆内存的最大大小，定义最小与最大的堆大小相同减少堆调整的次数，默认空余堆内存小于40%时，JVM就会增大堆直到最大堆内存；空余堆内存大于70%时JVM会减少堆内存直到最小堆内存。<br>-Xmn273m    年轻带堆内存 官方建议为堆内存的 3/8<br>堆内存的组成    总堆内存 = 年轻带堆内存 + 年老带堆内存 + 持久带堆内存<br>年轻带堆内存    对象刚创建出来时放在这里<br>年老带堆内存    对象在被真正会回收之前会先放在这里<br>持久带堆内存    class文件，元数据等放在这里<br>　关闭Preferences中Validation<br><img src="/images/4.png" alt=""><br>这些校验在使用Eclipse进行开发的过程中并没有感受到其带来的便利，但是使用这些功能会消耗eclipse的内存。所以还是关了吧。Disble All 然后确定。<br><img src="/images/5.png" alt=""></p>
 <p>关闭即时编译</p>
 <p>一般Eclipse会在3s左右检查一次代码有没有改变，如果存在则进行编译，通常的情况下我们是不需要这种及时编译的，在我们运行代码之前编译一次就行了。Ctrl+B Shift+W 都是很好的选择。而且大家通常做的都是ＷＥＢ开发项目在发布前会进行编译。</p>
 
