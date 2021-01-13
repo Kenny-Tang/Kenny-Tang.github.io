@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="简单介绍下我使用最多的持久层框架 Hibernate valuelist MyBatis 这三个框架，也是用过国内的一些产品，不过已经很少了。 虽然已经使用了很长时间，但是还没有认真的读过该项目的源码，不读一下总感觉有点遗憾，为此写出了该系列的博文，能力有限，不足或纰漏之处希望读者指正。 以下是对我常用的持久层框架的简单对比，不喜欢的可以忽略以下内容 HibernateHibernate 是我最早">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2021-01-13T09:51:57.793Z">
+<meta property="og:updated_time" content="2021-01-13T11:30:36.884Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MyBatis 源码解读（零）导语">
 <meta name="twitter:description" content="简单介绍下我使用最多的持久层框架 Hibernate valuelist MyBatis 这三个框架，也是用过国内的一些产品，不过已经很少了。 虽然已经使用了很长时间，但是还没有认真的读过该项目的源码，不读一下总感觉有点遗憾，为此写出了该系列的博文，能力有限，不足或纰漏之处希望读者指正。 以下是对我常用的持久层框架的简单对比，不喜欢的可以忽略以下内容 HibernateHibernate 是我最早">
@@ -313,7 +313,7 @@
         <p>简单介绍下我使用最多的持久层框架 <code>Hibernate</code> <code>valuelist</code> <code>MyBatis</code> 这三个框架，也是用过国内的一些产品，不过已经很少了。</p>
 <p>虽然已经使用了很长时间，但是还没有认真的读过该项目的源码，不读一下总感觉有点遗憾，为此写出了该系列的博文，能力有限，不足或纰漏之处希望读者指正。</p>
 <p>以下是对我常用的持久层框架的简单对比，不喜欢的可以忽略以下内容</p>
-<h2 id="Hibernate"><a href="#Hibernate" class="headerlink" title="Hibernate"></a>Hibernate</h2><p><code>Hibernate</code> 是我最早使用，曾经也是我十分热爱的框架 ：</p>
+<h2 id="Hibernate"><a href="#Hibernate" class="headerlink" title="Hibernate"></a>Hibernate</h2><p><code>Hibernate</code> 是我最早使用，曾经也是我十分热爱的框架 ：<br><a id="more"></a></p>
 <p>首先说这个框架的主旨思想是要从开发人员的思维中把表这一概念隐去，只保留对象的概念。到现在我还一直认为这是一个非常先进的理念，这样有一个非常明显的好处，就是可以让开发人员更专注于业务，不考虑与数据库交互的过程。</p>
 <p>但是就是她的思想太先进了，实际上到目前为止，与数据的交互一直是一个瓶颈，无论怎么做都不能实现几乎无延迟的数据检索与写入，<code>Hibernate</code>要做到好用就必须与数据产生大量的交互，截止到现在我们在数据存储和检索方面还做不到接近于无感知，而且可以断定在将来相当长的一段时间内也不太可能做得到。</p>
 <p>要解决这一问题就必须使用手写SQL 一旦使用手写SQL，这就已经不是 <code>Hibernate</code>的优势了，<code>Hibernate</code> 手写SQL时还是相当的繁琐的，而且不方便修改，这对开发人员来说是很不友好的事情。</p>
@@ -332,7 +332,7 @@
         <p><span>本文标题:</span><a  href="/2019/07/12/执行力/">MyBatis 源码解读（零）导语</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 Kenny Tang 的个人博客">Kenny Tang</a></p>
         <p><span>发布时间:</span>2019年07月12日 - 14时49分</p>
-        <p><span>最后更新:</span>2021年01月13日 - 09时51分</p>
+        <p><span>最后更新:</span>2021年01月13日 - 11时30分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/12/执行力/" title="MyBatis 源码解读（零）导语">http://kenny-tang.github.io/2019/07/12/执行力/</a>
             <span class="copy-path" data-clipboard-text="原文: http://kenny-tang.github.io/2019/07/12/执行力/　　作者: Kenny Tang" title=""></span>
