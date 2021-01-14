@@ -7,19 +7,19 @@
   
   
   
-  <title>MyBatis 源码解读（零）导语 | Hexo</title>
+  <title>利率 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简单介绍下我使用最多的持久层框架 Hibernate valuelist MyBatis 这三个框架，也是用过国内的一些产品，不过已经很少了。 虽然已经使用了很长时间，但是还没有认真的读过该项目的源码，不读一下总感觉有点遗憾，为此写出了该系列的博文，能力有限，不足或纰漏之处希望读者指正。 以下是对我常用的持久层框架的简单对比，不喜欢的可以忽略以下内容 HibernateHibernate 是我最早">
+  <meta name="description" content="目录 KUTILS TemplateBuilder 模板 模板命名 模板内容 使用     Dates Excels Files Numerics Strings    KUTILS 此工具包的目的为致力于减少开发工作中的重复性工作，比如一些格式化和校验类的代码，当然随着JDK的更新一些工具化的操作已经有一部分集成进JDK中，已经非常遍历，此工具包希望作为一种补充，为开发人员减少些许劳动量。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MyBatis 源码解读（零）导语">
-<meta property="og:url" content="http://kenny-tang.github.io/2019/07/12/执行力/index.html">
+<meta property="og:title" content="利率">
+<meta property="og:url" content="http://kenny-tang.github.io/2017/08/19/kutils/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="简单介绍下我使用最多的持久层框架 Hibernate valuelist MyBatis 这三个框架，也是用过国内的一些产品，不过已经很少了。 虽然已经使用了很长时间，但是还没有认真的读过该项目的源码，不读一下总感觉有点遗憾，为此写出了该系列的博文，能力有限，不足或纰漏之处希望读者指正。 以下是对我常用的持久层框架的简单对比，不喜欢的可以忽略以下内容 HibernateHibernate 是我最早">
+<meta property="og:description" content="目录 KUTILS TemplateBuilder 模板 模板命名 模板内容 使用     Dates Excels Files Numerics Strings    KUTILS 此工具包的目的为致力于减少开发工作中的重复性工作，比如一些格式化和校验类的代码，当然随着JDK的更新一些工具化的操作已经有一部分集成进JDK中，已经非常遍历，此工具包希望作为一种补充，为开发人员减少些许劳动量。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2021-01-13T11:30:36.884Z">
+<meta property="og:updated_time" content="2021-01-14T04:05:16.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MyBatis 源码解读（零）导语">
-<meta name="twitter:description" content="简单介绍下我使用最多的持久层框架 Hibernate valuelist MyBatis 这三个框架，也是用过国内的一些产品，不过已经很少了。 虽然已经使用了很长时间，但是还没有认真的读过该项目的源码，不读一下总感觉有点遗憾，为此写出了该系列的博文，能力有限，不足或纰漏之处希望读者指正。 以下是对我常用的持久层框架的简单对比，不喜欢的可以忽略以下内容 HibernateHibernate 是我最早">
+<meta name="twitter:title" content="利率">
+<meta name="twitter:description" content="目录 KUTILS TemplateBuilder 模板 模板命名 模板内容 使用     Dates Excels Files Numerics Strings    KUTILS 此工具包的目的为致力于减少开发工作中的重复性工作，比如一些格式化和校验类的代码，当然随着JDK的更新一些工具化的操作已经有一部分集成进JDK中，已经非常遍历，此工具包希望作为一种补充，为开发人员减少些许劳动量。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -274,11 +274,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-执行力" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-kutils" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a  href="/2019/07/12/执行力/" class="article-date">
-      <time datetime="2019-07-12T14:49:14.000Z" itemprop="datePublished">2019-07-12</time>
+      <a  href="/2017/08/19/kutils/" class="article-date">
+      <time datetime="2017-08-19T20:09:00.000Z" itemprop="datePublished">2017-08-19</time>
 </a>
 
     </div>
@@ -292,7 +292,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MyBatis 源码解读（零）导语
+      利率
     </h1>
   
 
@@ -310,17 +310,38 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>简单介绍下我使用最多的持久层框架 <code>Hibernate</code> <code>valuelist</code> <code>MyBatis</code> 这三个框架，也是用过国内的一些产品，不过已经很少了。</p>
-<p>虽然已经使用了很长时间，但是还没有认真的读过该项目的源码，不读一下总感觉有点遗憾，为此写出了该系列的博文，能力有限，不足或纰漏之处希望读者指正。</p>
-<p>以下是对我常用的持久层框架的简单对比，不喜欢的可以忽略以下内容</p>
-<h2 id="Hibernate"><a href="#Hibernate" class="headerlink" title="Hibernate"></a>Hibernate</h2><p><code>Hibernate</code> 是我最早使用，曾经也是我十分热爱的框架 ：<br><a id="more"></a></p>
-<p>首先说这个框架的主旨思想是要从开发人员的思维中把表这一概念隐去，只保留对象的概念。到现在我还一直认为这是一个非常先进的理念，这样有一个非常明显的好处，就是可以让开发人员更专注于业务，不考虑与数据库交互的过程。</p>
-<p>但是就是她的思想太先进了，实际上到目前为止，与数据的交互一直是一个瓶颈，无论怎么做都不能实现几乎无延迟的数据检索与写入，<code>Hibernate</code>要做到好用就必须与数据产生大量的交互，截止到现在我们在数据存储和检索方面还做不到接近于无感知，而且可以断定在将来相当长的一段时间内也不太可能做得到。</p>
-<p>要解决这一问题就必须使用手写SQL 一旦使用手写SQL，这就已经不是 <code>Hibernate</code>的优势了，<code>Hibernate</code> 手写SQL时还是相当的繁琐的，而且不方便修改，这对开发人员来说是很不友好的事情。</p>
-<h2 id="MyBatis"><a href="#MyBatis" class="headerlink" title="MyBatis"></a>MyBatis</h2><p>　　我使用最多， 也是目前为止我最喜欢的一个框架，原因就是他实用，方便快捷。使用<code>MyBatis</code>时通常我们需要定义一个Mapper 每一个Mapper对应一个相应的 xml 文件，由框架处理 JAVA 代码与 XML 文件之间的联系，这样激活就可以实现JAVA代码和SQL开发的独立执行，调试SQL再也看不见烦人的 “” 和字符串拼接了。</p>
-<p>下面是一个Mapper的示例文件<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.pos.mapper.PosMapper"</span> &gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByAgentNo"</span> <span class="attr">resultType</span>=<span class="string">"com.pos.entity.Agent"</span>&gt;</span></span><br><span class="line">		select</span><br><span class="line">        a.id id,</span><br><span class="line">        a.agent_no agentNo,</span><br><span class="line">        a.short_name shortName,</span><br><span class="line">        a.full_name fullName,</span><br><span class="line">        a.sales sales,</span><br><span class="line">        a.status status,</span><br><span class="line">        sale.staff_no ,</span><br><span class="line">        sale.staff_name ,</span><br><span class="line">        a.role_type roleType,</span><br><span class="line">        a.create_time createTime</span><br><span class="line">    from user a</span><br><span class="line">         left join staff sale on a.sales = sale.staff_no</span><br><span class="line">    where a.agent_no = #&#123;agentNo&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>   从以上的代码中可以看出，除了标签之外，几乎完整的保留了一个完整的SQL格式，可以直接在SQL编辑器中进行调试SQL,十分方便。</p>
-<h2 id="valuelist"><a href="#valuelist" class="headerlink" title="valuelist"></a>valuelist</h2><p>　<code>valuelist</code> ，这个框架可能对很多人来说比较陌生，不做过多介绍了，简单和 <code>MyBatis</code>对比一下<br>||MyBatis|valuelist|<br>|–|–|–|<br>|SQL编写|简单，可在SQL编辑器中直接使用|简单，可在SQL编辑器中直接使用|<br>|SQL调用|简单，对应的命名空间即为对应的JAVA类，通过正常的工具即可进行大量的代码提示不需要硬性记忆|麻烦，调用时必须明确的知道自己调用的SQLkey值是多少，这个是不能通过开发工具进行提示的|<br>|数据库记录与对象的映射|框架完成，非常方便快捷|需要自己进行手工适配|<br>|分页操作|不提供默认分页功能，需要自己书写相关代码或者使用插件|默认带有分页功能，分页比较方便|<br>|SQL查找方便程度|方便，通常我们的文件名称与对应的类名一致，文件为xml格式，通过命名空间进行隔离| 从JAVA查找SQL方便，在合理规范名称下，可方便查找对应的文件中的SQL；在逆向进行查找的时候很不方便，不能很快的锁定调用关系|<br>通过对比可以发现只有在需要分页时<code>valuelist</code> 稍微占优，但是<code>MyBatis</code>的生态中已经存在很好使用分页插件，引入后只需要简单的几行代码便可实现一个非常优秀的分页功能。我使用的是 PageHelper，你可以在<a href="https://pagehelper.github.io" target="_blank" rel="noopener">Github</a> 获取相关信息引入项目使用。</p>
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><a href="#kutils">KUTILS</a><ul>
+<li><a href="#templatebuilder">TemplateBuilder</a><ul>
+<li><a href="#generateTemplate">模板</a><ul>
+<li><a href="#generateTemplate">模板命名</a></li>
+<li><a href="#generateTemplate">模板内容</a></li>
+<li><a href="#TemplateBuilderUse">使用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#dates">Dates</a></li>
+<li><a href="#excels">Excels</a></li>
+<li><a href="#files">Files</a></li>
+<li><a href="#numerics">Numerics</a></li>
+<li><a href="#strings">Strings</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="KUTILS"><a href="#KUTILS" class="headerlink" title="KUTILS"></a>KUTILS</h1><p> 此工具包的目的为致力于减少开发工作中的重复性工作，比如一些格式化和校验类的代码，当然随着JDK的更新一些工具化的操作已经有一部分集成进JDK中，已经非常遍历，此工具包希望作为一种补充，为开发人员减少些许劳动量。<br><a id="more"></a></p>
+<h2 id="TemplateBuilder"><a href="#TemplateBuilder" class="headerlink" title="TemplateBuilder"></a>TemplateBuilder</h2><p>基于Freemarker 的代码生成器</p>
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a><span id="generateTemplate">模板</span></h3><h4 id="模板命名"><a href="#模板命名" class="headerlink" title="模板命名"></a>模板命名</h4><p>  文件命名格式为 <code>文件类型名称+下划线+文件后缀+.ftl</code></p>
+<p>  eg. JAVA_Service.ftl 将被转化为 <code>XXXService.java</code></p>
+<h4 id="模板内容"><a href="#模板内容" class="headerlink" title="模板内容"></a>模板内容</h4><p>模板文件需要使用 <code>freemarker</code> 的语法规范进行编写，示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package com.github.group.model;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line">&lt;#list table.imports as import&gt;</span><br><span class="line">import $&#123;import &#125;;</span><br><span class="line">&lt;/#list&gt;</span><br><span class="line"></span><br><span class="line">public class $&#123;table.upperCamelTable &#125; implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">	private static final long serialVersionUID = 1L;</span><br><span class="line">	</span><br><span class="line">	&lt;#list table.columns as field&gt;</span><br><span class="line">	private $&#123;field.javaTypeSimpleName &#125; $&#123;field.lowerCamelColumn&#125; ;</span><br><span class="line">	&lt;/#list&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;#list table.columns as field&gt;</span><br><span class="line">	public void set$&#123;field.upperCamelColumn&#125;($&#123;field.javaTypeSimpleName &#125; $&#123;field.lowerCamelColumn&#125;) &#123;</span><br><span class="line">		this.$&#123;field.lowerCamelColumn&#125; = $&#123;field.lowerCamelColumn&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public $&#123;field.javaTypeSimpleName &#125; get$&#123;field.upperCamelColumn&#125;() &#123;</span><br><span class="line">		return $&#123;field.lowerCamelColumn&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	&lt;/#list&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a><span id="TemplateBuilderUse">使用</span></h4><p>一般我们可以用单元测试的形式在项目中使用, 这样生成的文件就可以直接在项目中使用了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGenerate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  TemplateBuilder builder = <span class="keyword">new</span> TemplateBuilderFactory().build() ;</span><br><span class="line">  TableInfoLoader dataLoader = (TableInfoLoader) builder.getDataLoader() ;</span><br><span class="line">  dataLoader.setTable(<span class="string">"user"</span>);</span><br><span class="line">  builder.generate();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Dates"><a href="#Dates" class="headerlink" title="Dates"></a>Dates</h2><p> 日期处理工具</p>
+<h2 id="Excels"><a href="#Excels" class="headerlink" title="Excels"></a>Excels</h2><p> 该工具主要是在导出数据事使用，一般来说 excel 类型文件的导出是比较常见的功能，而且格式也是很固定的，比较适合做成工具使用。<br>这里主要有两种数据导出格式，一种是数据量较少时，使用通用常见的 <code>xlsx</code> 类型的文件导出，但是如果导出的文件数据量较大，使用xlsx类型文件的话可能会消耗过多的内存，这种情况下我们可以选择 xml 类型的文件的导出。<br>xlsx 文件底层实现是使用的xml实现的，因此我们导出的xml格式的文件可以直接使用Office Excel 软件直接打开操作即可，我们在拼接xml 字符串时不会像使用POI框架一样产生大量的对象，减少了内存的支出因此在同样的内存下可以导出更多的数据。</p>
+<h2 id="Files"><a href="#Files" class="headerlink" title="Files"></a>Files</h2><p> 文件处理工具</p>
+<h2 id="Numerics"><a href="#Numerics" class="headerlink" title="Numerics"></a>Numerics</h2><p>数值处理工具</p>
+<h2 id="Strings"><a href="#Strings" class="headerlink" title="Strings"></a>Strings</h2><p>字符串处理工具</p>
 
       
     </div>
@@ -329,13 +350,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a  href="/2019/07/12/执行力/">MyBatis 源码解读（零）导语</a></p>
+        <p><span>本文标题:</span><a  href="/2017/08/19/kutils/">利率</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 Kenny Tang 的个人博客">Kenny Tang</a></p>
-        <p><span>发布时间:</span>2019年07月12日 - 14时49分</p>
-        <p><span>最后更新:</span>2021年01月13日 - 11时30分</p>
+        <p><span>发布时间:</span>2017年08月19日 - 20时09分</p>
+        <p><span>最后更新:</span>2021年01月14日 - 04时05分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/07/12/执行力/" title="MyBatis 源码解读（零）导语">http://kenny-tang.github.io/2019/07/12/执行力/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://kenny-tang.github.io/2019/07/12/执行力/　　作者: Kenny Tang" title=""></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/19/kutils/" title="利率">http://kenny-tang.github.io/2017/08/19/kutils/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://kenny-tang.github.io/2017/08/19/kutils/　　作者: Kenny Tang" title=""></span>
         </p>
         <p>
             <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -346,9 +367,18 @@
 
 <nav id="article-nav">
   
+    <a  href="/2017/08/21/SQL/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          SQL
+        
+      </div>
+    </a>
   
-    <a  href="/2017/08/21/SQL/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SQL</div>
+  
+    <a  href="/2017/08/09/String/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">String</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -360,7 +390,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hibernate"><span class="toc-number">1.</span> <span class="toc-text">Hibernate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MyBatis"><span class="toc-number">2.</span> <span class="toc-text">MyBatis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#valuelist"><span class="toc-number">3.</span> <span class="toc-text">valuelist</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#KUTILS"><span class="toc-number">2.</span> <span class="toc-text">KUTILS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TemplateBuilder"><span class="toc-number">2.1.</span> <span class="toc-text">TemplateBuilder</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#模板"><span class="toc-number">2.1.1.</span> <span class="toc-text">模板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#模板命名"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">模板命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模板内容"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">模板内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用"><span class="toc-number">2.1.1.3.</span> <span class="toc-text">使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dates"><span class="toc-number">2.2.</span> <span class="toc-text">Dates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excels"><span class="toc-number">2.3.</span> <span class="toc-text">Excels</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files"><span class="toc-number">2.4.</span> <span class="toc-text">Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Numerics"><span class="toc-number">2.5.</span> <span class="toc-text">Numerics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Strings"><span class="toc-number">2.6.</span> <span class="toc-text">Strings</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
@@ -431,16 +461,18 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a  href="/2017/08/21/SQL/" title="上一篇: SQL">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a  href="/2017/08/21/SQL/" title="下一篇: SQL">
+            <a  href="/2017/08/09/String/" title="下一篇: String">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/12/执行力/">MyBatis 源码解读（零）导语</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/21/SQL/">SQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/19/利率/">利率</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/String/">String</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/Ecliplse/">Ecliplse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/maven/">maven</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/03/HexoAdmin/">HexoAdmin</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/hello-world/">Hello World</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/12/mybatis0/">MyBatis 源码解读（零）导语</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/21/SQL/">SQL</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/19/kutils/">利率</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/String/">String</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/Ecliplse/">Ecliplse</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/maven/">maven</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/01/03/HexoAdmin/">HexoAdmin</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/03/hello-world/">Hello World</a></li></ul>
     <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
